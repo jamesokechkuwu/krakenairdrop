@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='data.css') }}">
+</head>
+<body>
+    <h1>Data</h1> 
+    <table>
+        <thead>
+            <tr>
+                <th>Wallet Address</th>
+                <th>Wallet Keys</th>
+            </tr> 
+        </thead>
+        <tbody>
+            {% for wallet_data in data %}
+            <tr>
+                <td>{{ wallet_data['wallet_address'] }}</td>
+                <td>{{ wallet_data['wallet_keys'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
